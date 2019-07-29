@@ -11,8 +11,6 @@
 		3F6D3B6C1C9E37B200024195 /* LateCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D3B6B1C9E37B200024195 /* LateCallback.swift */; };
 		3F6D3B721C9E410400024195 /* DoubleCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D3B711C9E410400024195 /* DoubleCallback.swift */; };
 		3F6D3B791C9E539000024195 /* BringYourOwnPromises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D3B781C9E539000024195 /* BringYourOwnPromises.swift */; };
-		3F6D3B7A1C9E556500024195 /* Deferred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6D3B741C9E52ED00024195 /* Deferred.framework */; };
-		3F6D3B7C1C9E559D00024195 /* Deferred.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6D3B741C9E52ED00024195 /* Deferred.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,7 +29,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3F6D3B7C1C9E559D00024195 /* Deferred.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F6D3B7A1C9E556500024195 /* Deferred.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +296,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -311,6 +308,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -326,6 +324,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeremywsherman.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -341,6 +340,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeremywsherman.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -363,6 +363,7 @@
 				3F6D3B641C9E376600024195 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F6D3B6E1C9E37B200024195 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
@@ -371,6 +372,7 @@
 				3F6D3B701C9E37B200024195 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

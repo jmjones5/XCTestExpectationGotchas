@@ -1,24 +1,24 @@
 import XCTest
 
 class LateCallback: XCTestCase {
-    let callBackDelay: NSTimeInterval = 2
+    let callBackDelay: TimeInterval = 2
 
 
     func xtestNotWaitingLongEnough() {
-        let promiseToCallBack = expectationWithDescription("calls back")
+        let promiseToCallBack = expectation(description: "calls back")
         after(seconds: callBackDelay) { () -> Void in
             print("I knew you'd call!")
             promiseToCallBack.fulfill()
         }
 
-        waitForExpectationsWithTimeout(callBackDelay / 2) { error in
-            print("Aww, we timed out: \(error)")
+        waitForExpectations(timeout: callBackDelay / 2) { error in
+            print("Aww, we timed out: \(String(describing: error))")
         }
     }
 
 
     func testPreparedForNotWaitingLongEnough() {
-        weak var promiseToCallBack = expectationWithDescription("calls back")
+        weak var promiseToCallBack = expectation(description: "calls back")
         after(seconds: callBackDelay) { () -> Void in
             guard let promise = promiseToCallBack else {
                 print("too late, buckaroo")
@@ -29,8 +29,8 @@ class LateCallback: XCTestCase {
             promise.fulfill()
         }
 
-        waitForExpectationsWithTimeout(callBackDelay / 2) { error in
-            print("Aww, we timed out: \(error)")
+        waitForExpectations(timeout: callBackDelay / 2) { error in
+            print("Aww, we timed out: \(String(describing: error))")
         }
     }
 
@@ -45,12 +45,10 @@ class LateCallback: XCTestCase {
 
 
 
-func after(seconds seconds: NSTimeInterval, call closure: () -> Void) {
-    let delay = dispatch_time(
-        DISPATCH_TIME_NOW,
-        Int64(seconds) * numericCast(NSEC_PER_SEC))
-    let ontoQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-    dispatch_after(delay, ontoQueue) {
+func after(seconds: TimeInterval, call closure: @escaping () -> Void) {
+    let delay = DispatchTime.now() + seconds
+    let ontoQueue = DispatchQueue.global(qos: .background)
+    ontoQueue.asyncAfter(deadline: delay) {
         print("\(seconds): finished waiting")
         closure()
         print("\(seconds): all done here")
@@ -59,7 +57,7 @@ func after(seconds seconds: NSTimeInterval, call closure: () -> Void) {
 
 
 
-func spin(forSeconds seconds: NSTimeInterval) {
-    let afterCallBack = NSDate(timeIntervalSinceNow: seconds)
-    NSRunLoop.mainRunLoop().runUntilDate(afterCallBack)
+func spin(forSeconds seconds: TimeInterval) {
+    let afterCallBack = Date(timeIntervalSinceNow: seconds)
+    RunLoop.main.run(until: afterCallBack)
 }

@@ -1,9 +1,10 @@
 import XCTest
 
 class DoubleCallback: XCTestCase {
-    func xtestDoubleTheFulfillment() {
-        let promiseToCallBack = expectationWithDescription("calls back")
-        let callBackDelay: NSTimeInterval = 1
+    
+    func testDoubleTheFulfillment() {
+        let promiseToCallBack = expectation(description: "calls back")
+        let callBackDelay: TimeInterval = 1
 
         twiceAfter(seconds: callBackDelay) {
             print("i hear you calling me")
@@ -11,13 +12,13 @@ class DoubleCallback: XCTestCase {
         }
 
         let afterCallBack = 2 * callBackDelay
-        waitForExpectationsWithTimeout(afterCallBack, handler: nil)
+        waitForExpectations(timeout: afterCallBack, handler: nil)
     }
 
 
     func testSafelyDoubleTheFulfillment() {
-        weak var promiseToCallBack = expectationWithDescription("calls back")
-        let callBackDelay: NSTimeInterval = 1
+        weak var promiseToCallBack = expectation(description: "calls back")
+        let callBackDelay: TimeInterval = 1
 
         twiceAfter(seconds: callBackDelay) {
             guard let promise = promiseToCallBack else {
@@ -30,13 +31,13 @@ class DoubleCallback: XCTestCase {
         }
 
         let afterCallBack = 2 * callBackDelay
-        waitForExpectationsWithTimeout(afterCallBack, handler: nil)
+        waitForExpectations(timeout: afterCallBack, handler: nil)
     }
 }
 
 
 
-func twiceAfter(seconds seconds: NSTimeInterval, call closure: () -> Void) {
+func twiceAfter(seconds: TimeInterval, call closure: @escaping () -> Void) {
     after(seconds: seconds) { () -> Void in
         print("now once")
         closure()
